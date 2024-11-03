@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <img src="" th:src="@{/image/img1.png}" alt="" /><img src="" th:src="@{/image/img1.png}" alt="" /><img src="" th:src="@{/image/img1.png}" alt="" />
+    <title>Détails de l'événement</title>
+    <link rel="stylesheet"  th:href="@{/styles.css}" />
+</head>
+<body>
+<h1>Participants pour l'événement : <span th:text="${event.name}">Événement 1</span></h1>
+<a th:href="@{/events}">Retour aux événements</a>
+
+<h2>Liste des Participants</h2>
+<ul>
+    <li th:each="participant : ${participants}">
+        Nom : <span th:text="${participant.name}"></span><br>
+        Email : <span th:text="${participant.email}"></span>
+    </li>
+</ul>
+
+<h2>Ajouter un Nouveau Participant</h2>
+<form th:action="@{|/events/${event.id}/participants/add|}" th:object="${newParticipant}" method="post">
+    <label for="name">Nom :</label>
+    <input type="text" id="name" th:field="*{name}" /><br>
+    <label for="email">Email :</label>
+    <input type="email" id="email" th:field="*{email}" /><br>
+    <button type="submit">Ajouter le Participant</button>
+</form>
+</body>
+
+</html>
